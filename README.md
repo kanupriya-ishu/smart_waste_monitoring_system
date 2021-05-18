@@ -1,0 +1,1 @@
+# smart_waste_monitoring_system
