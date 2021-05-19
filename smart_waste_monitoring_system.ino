@@ -14,7 +14,7 @@ WiFiServer server(80);
 const char* MY_SSID = "TP-Link";
 const char* MY_PWD = "pr@s@d9020";
 const char* TS_SERVER = "api.thingspeak.com";
-String TS_API_KEY ="6URW1ZLFFCW3NPTD";
+String TS_API_KEY ="ZPSRGPO6KWC3D7BG";
 
 //Wi-fi connectivity 
 
