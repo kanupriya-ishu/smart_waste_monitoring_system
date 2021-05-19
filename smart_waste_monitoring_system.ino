@@ -15,3 +15,27 @@ const char* MY_SSID = "TP-Link";
 const char* MY_PWD = "pr@s@d9020";
 const char* TS_SERVER = "api.thingspeak.com";
 String TS_API_KEY ="6URW1ZLFFCW3NPTD";
+
+//Wi-fi connectivity 
+
+void connectWifi()  //connecting the WiFI via NodeMCU 
+{
+ Serial.begin(115200);
+ Serial.print("Connecting to "+ *MY_SSID);
+ WiFi.begin(MY_SSID, MY_PWD);
+ while (WiFi.status() != WL_CONNECTED)
+ {
+ delay(1000);
+ Serial.print(".");
+ }
+ Serial.println("");
+ Serial.println("WiFi Connected");
+ Serial.println("");
+ server.begin();
+ Serial.println("Server started");
+ Serial.print("Use this URL to connect: ");
+ Serial.print("http://");
+ Serial.print(WiFi.localIP());
+ Serial.println("/");
+}
+
