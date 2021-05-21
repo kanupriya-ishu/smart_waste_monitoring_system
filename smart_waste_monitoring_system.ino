@@ -56,3 +56,37 @@ long readUltrasonicDistance(int triggerPin, int echoPin)  //THis function reads 
   }
 
 
+// Send data to ThingSpeak Server
+void sendDataTS(void)  
+{
+	float cm1 = 0.01723 * readUltrasonicDistance(trigPin1,echoPin1);
+	//int percent1 = map(cm1,9.8,0,0,100);
+	int percent1 = 100 - (int)(cm1/9.8*100);
+	float cm2 = 0.01723 * readUltrasonicDistance(trigPin2,echoPin2);
+	//int percent2 = map(cm2,9.8,0,0,100);
+	int percent2 = 100 - (int)(cm2/9.8*100);
+	Serial.print("Percent_1: ");
+	Serial.println(percent1);
+	Serial.print("Percent_2: ");
+	Serial.println(percent2);
+
+	if (client.connect(TS_SERVER, 80))
+	{
+	String url = "/update?api_key=";
+	url += TS_API_KEY;
+	url += "&field1=";
+	url += String(percent1);
+	url += "&field2=";
+	url += String(percent2);
+
+	Serial.print("Requesting URL: ");
+	Serial.println(url);
+
+	// This will send the request to the server
+	client.print(String("GET ") + url + " HTTP/1.1\r\n" +
+			   "Host: " + TS_SERVER + "\r\n" + 
+			   "Connection: close\r\n\r\n");
+	delay(100);
+	}
+	client.stop();
+}
