@@ -90,3 +90,22 @@ void sendDataTS(void)
 	}
 	client.stop();
 }
+
+//main function
+void setup()
+{
+ Serial.begin(9600);
+ delay(10);
+ connectWifi();
+ pinMode(trigPin1, OUTPUT); // Sets the trigPin as an Output
+ pinMode(echoPin1, INPUT); // Sets the echoPin as an Input
+ pinMode(trigPin2, OUTPUT); // Sets the trigPin as an Output
+ pinMode(echoPin2, INPUT); // Sets the echoPin as an Input
+ ThingSpeak.begin(client);
+}
+
+void loop()
+{
+ sendDataTS();
+ delay(16000);
+}
